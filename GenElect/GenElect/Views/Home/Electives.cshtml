@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "Electives";
+}
+
+<h2>Electives</h2>
+<h3>Here are all of the electives that have been offered in the past and may be offered again this summer!</h3>
+<style>
+    table strong {
+        font-weight: bold;
+    }
+
+    table {
+        background: #f5f5f5;
+        border-collapse: separate;
+        box-shadow: inset 0 1px 0 #fff;
+        font-size: 12px;
+        line-height: 24px;
+        margin: 30px auto;
+        text-align: left;
+        width: 800px;
+        color: #444;
+        font: 100%/30px 'Helvetica Neue', helvetica, arial, sans-serif;
+        text-shadow: 0 1px 0 #fff;
+    }
+
+    th {
+        background: url(https://jackrugile.com/images/misc/noise-diagonal.png), linear-gradient(#777, #444);
+        border-left: 1px solid #555;
+        border-right: 1px solid #777;
+        border-top: 1px solid #555;
+        border-bottom: 1px solid #333;
+        box-shadow: inset 0 1px 0 #999;
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 15px;
+        position: relative;
+        text-shadow: 0 1px 0 #000;
+    }
+
+        th:after {
+            background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
+            content: '';
+            display: block;
+            height: 25%;
+            left: 0;
+            margin: 1px 0 0 0;
+            position: absolute;
+            top: 25%;
+            width: 100%;
+        }
+
+        th:first-child {
+            border-left: 1px solid #777;
+            box-shadow: inset 1px 1px 0 #999;
+        }
+
+        th:last-child {
+            box-shadow: inset -1px 1px 0 #999;
+        }
+
+    td {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #e8e8e8;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 15px;
+        position: relative;
+        transition: all 300ms;
+    }
+
+        td:first-child {
+            box-shadow: inset 1px 0 0 #fff;
+        }
+
+        td:last-child {
+            border-right: 1px solid #e8e8e8;
+            box-shadow: inset -1px 0 0 #fff;
+        }
+
+    tr {
+        background: url(https://jackrugile.com/images/misc/noise-diagonal.png);
+    }
+
+        tr:nth-child(odd) td {
+            background: #f1f1f1 url(https://jackrugile.com/images/misc/noise-diagonal.png);
+        }
+
+        tr:last-of-type td {
+            box-shadow: inset 0 -1px 0 #fff;
+        }
+
+            tr:last-of-type td:first-child {
+                box-shadow: inset 1px -1px 0 #fff;
+            }
+
+            tr:last-of-type td:last-child {
+                box-shadow: inset -1px -1px 0 #fff;
+            }
+
+    tbody:hover td {
+        color: transparent;
+        text-shadow: 0 0 3px #aaa;
+    }
+
+    tbody:hover tr:hover td {
+        color: #444;
+        text-shadow: 0 1px 0 #fff;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>Elective</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>WebHacking 1</strong></td>
+            <td>Learn some basic web hacking techniques</td>
+        </tr>
+        <tr>
+            <td><strong>WebHacking 2</strong></td>
+            <td>Learn some more advanced web hacking techniques (recommend completing WebHacking 1 before taking this course)</td>
+        </tr>
+        <tr>
+            <td><strong>Defensive Security 1</strong></td>
+            <td>Strengthen your skills as a network defender, learn how to destroy bad shells and recognize malicious software</td>
+        </tr>
+        <tr>
+            <td><strong>Defensive Sercurity 2</strong></td>
+            <td>Further extend your defensive ability (recommend completing Defensive Security 1 before taking this course)</td>
+        </tr>
+        <tr>
+            <td><strong>Python Programming 1</strong></td>
+            <td>Basic python programming on Raspberry Pi's</td>
+        </tr>
+        <tr>
+            <td><strong>Python Programming 2</strong></td>
+            <td>Advanced python programming on all sorts of devices (recommend completing Python Programming 1 before taking this course)</td>
+        </tr>
+        <tr>
+            <td><strong>Web Sockets</strong></td>
+            <td>Learn to program some web sockets</td>
+        </tr>
+        <tr>
+            <td><strong>Networking 1</strong></td>
+            <td>Basic Networking Tools</td>
+        </tr>
+        <tr>
+            <td><strong>Networking 2</strong></td>
+            <td>More advanced Networking techniquest (recommend completing Networking 1 before taking this course)</td>
+        </tr>
+        <tr>
+            <td><strong>Assembly</strong></td>
+            <td>Learn some very low level computer programming</td>
+        </tr>
+        <tr>
+            <td><strong>Phishing</strong></td>
+            <td>Learn how to be aware of phishing attacks and how to use software to make your own "safe" attacks</td>
+        </tr>
+        <tr>
+            <td><strong>Minecraft Programming</strong></td>
+            <td>Learn how to develop different tools to use within the world of Minecraft</td>
+        </tr>
+        <tr>
+            <td><strong>Lock Picking</strong></td>
+            <td>Explore the world of lock picking with the option to purchase or even win some lock picking sets</td>
+        </tr>
+        <tr>
+            <td><strong>Persistance Lab</strong></td>
+            <td>Learn about the world of Persistance and how to defend against it</td>
+        </tr>
+    </tbody>
+</table>
