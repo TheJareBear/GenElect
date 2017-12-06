@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-static-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -24,9 +24,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Electives", "Electives", "Home")</li>
-                    <li>@Html.ActionLink("View This Years Electives", "Index", "Electives")</li>
-                    <li>@Html.ActionLink("View Periods", "Index", "Periods")</li>
+                    <li>@Html.ActionLink("Past Electives", "Electives", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

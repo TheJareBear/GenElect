@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using GenElect.DAL;
 using GenElect.Models;
+using Microsoft.AspNet.Identity;
 
 namespace GenElect.Controllers
 {
@@ -16,11 +17,26 @@ namespace GenElect.Controllers
         private CatalogContext db = new CatalogContext();
 
         // GET: Electives
-        public ActionResult Index(string period)
+        public ActionResult Index(string period, string search)
         {
             var electives = db.Electives.Include(p => p.Period);
             if(!String.IsNullOrEmpty(period))
                 electives = db.Electives.Where(e => e.Period.PeriodNumber.ToString() == period);
+
+            if(!String.IsNullOrEmpty(search))
+            {
+                electives = electives.Where(p => p.Name.Contains(search) || p.Description.Contains(search) || p.Instructor.Contains(search));
+                ViewBag.Search = search;
+            }
+
+            var periods = electives.OrderBy(p => p.Period.ID).Select(p => p.Period.ID).Distinct();
+
+            if(!String.IsNullOrEmpty(period))
+            {
+                electives = electives.Where(p => p.Period.ID.ToString() == period);
+            }
+
+            ViewBag.Period = new SelectList(periods);
 
             return View(electives.ToList());
         }
@@ -79,6 +95,25 @@ namespace GenElect.Controllers
             }
             ViewBag.PeriodID = new SelectList(db.Periods, "ID", "ID", elective.PeriodID);
             return View(elective);
+        }
+
+        public ActionResult Register(string electiveName, int period)
+        {
+            ApplicationDbContext appDb = new ApplicationDbContext();
+
+            var userId = User.Identity.GetUserId();
+
+            ApplicationUser appUser = appDb.Users.Select(x => x).Where(x => x.Id == userId).FirstOrDefault();
+            if (period == 1)
+                appUser.Elective1 = electiveName;
+            else if (period == 2)
+                appUser.Elective2 = electiveName;
+            else
+                appUser.Elective3 = electiveName;
+
+            appDb.SaveChangesAsync();
+
+            return View();
         }
 
         // POST: Electives/Edit/5

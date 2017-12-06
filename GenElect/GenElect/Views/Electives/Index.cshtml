@@ -1,14 +1,41 @@
 ﻿@model IEnumerable<GenElect.Models.Elective>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Electives";
 }
 
-<h2>Index</h2>
+<script>
+    function clearSearch()
+    {
+        document.getElementById("Search").value = "";
+    }
+</script>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>@ViewBag.Title</h2>
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
+@using (Html.BeginForm("Index", "Electives", FormMethod.Get))
+{
+<div class="form-group">
+    @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search Electives" })
+    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="button" class="btn btn-default" onclick="clearSearch()">Clear</button>
+</div>
+}
+
+@using (Html.BeginForm("Index", "Electives", FormMethod.Get))
+{
+    <label>Filter electives from period value:</label> @Html.DropDownList("Period","All") <input type="submit" class="btn" value="Filter" />
+    <input type="hidden" name="Search" id="Search" value="@ViewBag.Search" />
+}
+
+<br />
+
 <table class="table">
     <tr>
         <th>
@@ -32,32 +59,66 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Period.ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Instructor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Capacity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CurrentStudentCount)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Period.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Instructor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentStudentCount)
+            </td>
+            <td>
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })<span> | </span>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })<span> | </span>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                }
+                @if (User.IsInRole("Students") && item.CurrentStudentCount < item.Capacity)
+                {
+                    //<button class="btn btn-success btn-md" data-toggle="modal" data-target="#@item.ID">Register!</button>
+                    @Html.ActionLink("Register", "Register", new { electiveName = item.Name, period = item.Period.PeriodNumber }, null)
+                }
+                @if (User.IsInRole("Students") && item.CurrentStudentCount >= item.Capacity)
+                {
+                    //<button class="btn btn-danger btn-md" data-toggle="modal" data-target="#@item.ID" disabled>Full</button>
+                    <p>Class is full</p>
+                }
+
+                <div id=@item.ID class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Registration successful!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>@User.Identity.Name has been registered for @item.Name</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
 
 </table>

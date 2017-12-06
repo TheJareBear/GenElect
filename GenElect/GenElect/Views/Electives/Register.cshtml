@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Registration Success!";
+}
+
+<h2>Congrats you have registered!</h2>
+@Html.ActionLink("Back to Electives", "Index", "Electives") |
+@Html.ActionLink("View your schedule", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+
+

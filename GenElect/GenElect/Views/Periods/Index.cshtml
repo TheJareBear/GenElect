@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<GenElect.Models.Period>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Periods";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -20,7 +20,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.PeriodNumber)
+            @Html.ActionLink(item.PeriodNumber.ToString(), "Index", "Electives", new { period = item.PeriodNumber },null)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

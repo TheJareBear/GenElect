@@ -6767,6 +6767,9 @@ td.hidden-lg {
 }
 
 @media (min-width: 1200px) {
+    .container{
+        max-width:1300px;
+    }
   .hidden-lg {
     display: none !important;
   }
