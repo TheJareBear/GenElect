@@ -1,4 +1,6 @@
-﻿namespace GenElect.Models
+﻿using System.Collections.Generic;
+
+namespace GenElect.Models
 {
     public class Elective
     {
@@ -10,5 +12,6 @@
         public int CurrentStudentCount { get; set; }
         public int? PeriodID { get; set; }
         public virtual Period Period { get; set; }
+        //public List<ApplicationUser> Roster { get; set; }
     }
 }

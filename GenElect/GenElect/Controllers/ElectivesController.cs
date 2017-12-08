@@ -19,6 +19,9 @@ namespace GenElect.Controllers
         // GET: Electives
         public ActionResult Index(string period, string search)
         {
+            ApplicationDbContext appDb = new ApplicationDbContext();
+            var userId = User.Identity.GetUserId();
+            ApplicationUser appUser = appDb.Users.Select(x => x).Where(x => x.Id == userId).FirstOrDefault();
             var electives = db.Electives.Include(p => p.Period);
             if(!String.IsNullOrEmpty(period))
                 electives = db.Electives.Where(e => e.Period.PeriodNumber.ToString() == period);
@@ -37,6 +40,7 @@ namespace GenElect.Controllers
             }
 
             ViewBag.Period = new SelectList(periods);
+            ViewBag.User = appUser;
 
             return View(electives.ToList());
         }
@@ -97,21 +101,51 @@ namespace GenElect.Controllers
             return View(elective);
         }
 
-        public ActionResult Register(string electiveName, int period)
+        public ActionResult Register(string electiveName, int period, int? id)
         {
             ApplicationDbContext appDb = new ApplicationDbContext();
-
+            CatalogContext catDb = new CatalogContext();
             var userId = User.Identity.GetUserId();
 
             ApplicationUser appUser = appDb.Users.Select(x => x).Where(x => x.Id == userId).FirstOrDefault();
+            Elective elective = catDb.Electives.Select(x => x).Where(x => x.ID == id).FirstOrDefault();
+
             if (period == 1)
-                appUser.Elective1 = electiveName;
+            {
+                if (appUser.Elective1 == null)
+                {
+                    appUser.Elective1 = electiveName;
+                    ViewBag.Message = "Successful registration!";
+                    elective.CurrentStudentCount++;
+                }
+                else
+                    ViewBag.Message = "Sorry registration failed, you already have an elective selected for that period";
+            }
             else if (period == 2)
-                appUser.Elective2 = electiveName;
+            {
+                if (appUser.Elective2 == null)
+                {
+                    appUser.Elective2 = electiveName;
+                    ViewBag.Message = "Successful registration!";
+                    elective.CurrentStudentCount++;
+                }
+                else
+                    ViewBag.Message = "Sorry registration failed, you already have an elective selected for that period";
+            }
             else
-                appUser.Elective3 = electiveName;
+            {
+                if (appUser.Elective3 == null)
+                {
+                    appUser.Elective3 = electiveName;
+                    ViewBag.Message = "Successful registration!";
+                    elective.CurrentStudentCount++;
+                }
+                else
+                    ViewBag.Message = "Sorry registration failed, you already have an elective selected for that period";
+            }
 
             appDb.SaveChangesAsync();
+            catDb.SaveChangesAsync();
 
             return View();
         }

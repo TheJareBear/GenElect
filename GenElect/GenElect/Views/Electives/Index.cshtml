@@ -87,15 +87,20 @@
                     @Html.ActionLink("Details", "Details", new { id = item.ID })<span> | </span>
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                 }
-                @if (User.IsInRole("Students") && item.CurrentStudentCount < item.Capacity)
+
+                @if (User.IsInRole("Students") && item.CurrentStudentCount < item.Capacity && ViewBag.User.Elective1 != item.Name && ViewBag.User.Elective2 != item.Name && ViewBag.User.Elective3 != item.Name)
                 {
                     //<button class="btn btn-success btn-md" data-toggle="modal" data-target="#@item.ID">Register!</button>
-                    @Html.ActionLink("Register", "Register", new { electiveName = item.Name, period = item.Period.PeriodNumber }, null)
+                    @Html.ActionLink("Register", "Register", new { electiveName = item.Name, period = item.Period.PeriodNumber, id = item.ID }, null)
                 }
-                @if (User.IsInRole("Students") && item.CurrentStudentCount >= item.Capacity)
+                else if (User.IsInRole("Students") && item.CurrentStudentCount >= item.Capacity)
                 {
                     //<button class="btn btn-danger btn-md" data-toggle="modal" data-target="#@item.ID" disabled>Full</button>
                     <p>Class is full</p>
+                }
+                else if(ViewBag.User.Elective1 == item.Name || ViewBag.User.Elective2 == item.Name || ViewBag.User.Elective3 == item.Name)
+                {
+                    @Html.ActionLink("Unregister", "Unregister", "Manage", new { ename = item.Name, period = item.Period.PeriodNumber }, null)
                 }
 
                 <div id=@item.ID class="modal fade" role="dialog">

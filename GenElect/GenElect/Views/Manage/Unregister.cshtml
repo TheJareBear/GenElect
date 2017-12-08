@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = "Unregistered";
+}
+
+<h2>Unregistered Successfully!</h2>
+@Html.ActionLink("Back to Electives", "Index", "Electives") |
+@Html.ActionLink("View your schedule", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+

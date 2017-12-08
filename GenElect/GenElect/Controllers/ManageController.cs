@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GenElect.Models;
 using System.Collections.Generic;
+using GenElect.DAL;
 
 namespace GenElect.Controllers
 {
@@ -49,6 +50,31 @@ namespace GenElect.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        public ActionResult Unregister(string ename, int period)
+        {
+            ApplicationDbContext appDb = new ApplicationDbContext();
+            CatalogContext catDb = new CatalogContext();
+            var userId = User.Identity.GetUserId();
+
+            ApplicationUser appUser = appDb.Users.Select(x => x).Where(x => x.Id == userId).FirstOrDefault();
+            Elective elective = catDb.Electives.Select(x => x).Where(x => x.Name == ename).FirstOrDefault();
+
+            elective.CurrentStudentCount--;
+
+            if (period == 1)
+                appUser.Elective1 = null;
+            else if (period == 2)
+                appUser.Elective2 = null;
+            else if(period == 3)
+                appUser.Elective3 = null;
+
+            appDb.SaveChangesAsync();
+            catDb.SaveChangesAsync();
+
+
+            return View();
         }
 
         //

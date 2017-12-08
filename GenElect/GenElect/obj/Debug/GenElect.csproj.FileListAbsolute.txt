@@ -165,3 +165,5 @@ C:\Users\User\Dropbox\School\Object Oriented Programming\Final Project\GenElect\
 C:\Users\User\Dropbox\School\Object Oriented Programming\Final Project\GenElect\GenElect\GenElect\obj\Debug\GenElect.pdb
 C:\Users\User\Dropbox\School\Object Oriented Programming\Final Project\GenElect\GenElect\GenElect\obj\Debug\GenElect.Migrations.InitialCreate.resources
 C:\Users\User\Dropbox\School\Object Oriented Programming\Final Project\GenElect\GenElect\GenElect\obj\Debug\GenElect.csproj.GenerateResource.Cache
+C:\Users\Jarod\Dropbox\School\Object Oriented Programming\Final Project\GenElect\GenElect\GenElect\obj\Debug\GenElect.Migrations.InitialCreate.resources
+C:\Users\Jarod\Dropbox\School\Object Oriented Programming\Final Project\GenElect\GenElect\GenElect\obj\Debug\GenElect.csproj.GenerateResource.Cache
