@@ -52,23 +52,23 @@ namespace GenElect.Controllers
             }
         }
 
-        public ActionResult Unregister(string ename, int period)
+        public ActionResult Unregister(int electiveID, int period)
         {
             ApplicationDbContext appDb = new ApplicationDbContext();
             CatalogContext catDb = new CatalogContext();
             var userId = User.Identity.GetUserId();
 
             ApplicationUser appUser = appDb.Users.Select(x => x).Where(x => x.Id == userId).FirstOrDefault();
-            Elective elective = catDb.Electives.Select(x => x).Where(x => x.Name == ename).FirstOrDefault();
+            Elective elective = catDb.Electives.Select(x => x).Where(x => x.ID == electiveID).FirstOrDefault();
 
             elective.CurrentStudentCount--;
 
             if (period == 1)
-                appUser.Elective1 = null;
+                appUser.Elective1 = 0;
             else if (period == 2)
-                appUser.Elective2 = null;
+                appUser.Elective2 = 0;
             else if(period == 3)
-                appUser.Elective3 = null;
+                appUser.Elective3 = 0;
 
             appDb.SaveChangesAsync();
             catDb.SaveChangesAsync();
@@ -91,12 +91,20 @@ namespace GenElect.Controllers
                 : "";
 
             ApplicationDbContext appDb = new ApplicationDbContext();
+            CatalogContext catDb = new CatalogContext();
 
             var userId = User.Identity.GetUserId();
 
             ApplicationUser appUser = appDb.Users.Select(x => x).Where(x => x.Id == userId).FirstOrDefault();
 
+            Elective e1 = catDb.Electives.Select(x => x).Where(x => x.ID == appUser.Elective1).FirstOrDefault();
+            Elective e2 = catDb.Electives.Select(x => x).Where(x => x.ID == appUser.Elective2).FirstOrDefault();
+            Elective e3 = catDb.Electives.Select(x => x).Where(x => x.ID == appUser.Elective3).FirstOrDefault();
+
             ViewBag.User = appUser;
+            ViewBag.e1 = e1;
+            ViewBag.e2 = e2;
+            ViewBag.e3 = e3;
 
             var model = new IndexViewModel
             {

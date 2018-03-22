@@ -21,9 +21,9 @@ namespace GenElect.Models
         //[StringLength(50)]
         //public string LastName { get; set; }
 
-        public string Elective1 { get; set; }
-        public string Elective2 { get; set; }
-        public string Elective3 { get; set; }
+        public int Elective1 { get; set; }
+        public int Elective2 { get; set; }
+        public int Elective3 { get; set; }
 
         //these additional fields are to be implemented after it is decided how we will proceed with the student accounts
 

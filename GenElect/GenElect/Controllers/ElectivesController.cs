@@ -45,6 +45,32 @@ namespace GenElect.Controllers
             return View(electives.ToList());
         }
 
+        public ActionResult Roster(int? id, int? period)
+        {
+            ApplicationDbContext appDb = new ApplicationDbContext();
+            var students = appDb.Users.Where(s => s.Elective1 == -99);
+            if (period == 1)
+            {
+                students = appDb.Users.Where(s => s.Elective1 == id);
+            }
+            if (period == 2)
+            {
+                students = appDb.Users.Where(s => s.Elective2 == id);
+            }
+            if (period == 3)
+            {
+                students = appDb.Users.Where(s => s.Elective3 == id);
+            }
+
+            Elective elective = db.Electives.Find(id);
+
+            ViewBag.ElectiveName = elective.Name;
+            ViewBag.PeriodNumber = period;
+            ViewBag.Instructor = elective.Instructor;
+
+            return View(students.ToList());
+        }
+
         // GET: Electives/Details/5
         public ActionResult Details(int? id)
         {
@@ -101,7 +127,7 @@ namespace GenElect.Controllers
             return View(elective);
         }
 
-        public ActionResult Register(string electiveName, int period, int? id)
+        public ActionResult Register(int electiveID, int period, int? id)
         {
             ApplicationDbContext appDb = new ApplicationDbContext();
             CatalogContext catDb = new CatalogContext();
@@ -112,34 +138,40 @@ namespace GenElect.Controllers
 
             if (period == 1)
             {
-                if (appUser.Elective1 == null)
+                if (appUser.Elective1 == 0 && elective.CurrentStudentCount < elective.Capacity)
                 {
-                    appUser.Elective1 = electiveName;
+                    appUser.Elective1 = electiveID;
                     ViewBag.Message = "Successful registration!";
                     elective.CurrentStudentCount++;
                 }
+                else if (elective.CurrentStudentCount >= elective.Capacity)
+                    ViewBag.Message = "Sorry, that class is now full";
                 else
                     ViewBag.Message = "Sorry registration failed, you already have an elective selected for that period";
             }
             else if (period == 2)
             {
-                if (appUser.Elective2 == null)
+                if (appUser.Elective2 == 0 && elective.CurrentStudentCount < elective.Capacity)
                 {
-                    appUser.Elective2 = electiveName;
+                    appUser.Elective2 = electiveID;
                     ViewBag.Message = "Successful registration!";
                     elective.CurrentStudentCount++;
                 }
+                else if (elective.CurrentStudentCount >= elective.Capacity)
+                    ViewBag.Message = "Sorry, that class is now full";
                 else
                     ViewBag.Message = "Sorry registration failed, you already have an elective selected for that period";
             }
             else
             {
-                if (appUser.Elective3 == null)
+                if (appUser.Elective3 == 0 && elective.CurrentStudentCount < elective.Capacity)
                 {
-                    appUser.Elective3 = electiveName;
+                    appUser.Elective3 = electiveID;
                     ViewBag.Message = "Successful registration!";
                     elective.CurrentStudentCount++;
                 }
+                else if (elective.CurrentStudentCount >= elective.Capacity)
+                    ViewBag.Message = "Sorry, that class is now full";
                 else
                     ViewBag.Message = "Sorry registration failed, you already have an elective selected for that period";
             }

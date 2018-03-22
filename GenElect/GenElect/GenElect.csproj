@@ -300,6 +300,7 @@
     <Content Include="Views\UsersAdmin\Create.cshtml" />
     <Content Include="Views\Electives\Register.cshtml" />
     <Content Include="Views\Manage\Unregister.cshtml" />
+    <Content Include="Views\Electives\Roster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

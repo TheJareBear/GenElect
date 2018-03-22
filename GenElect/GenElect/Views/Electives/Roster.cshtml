@@ -1,0 +1,34 @@
+﻿@model IEnumerable<GenElect.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Roster for class: " + ViewBag.ElectiveName;
+}
+
+<h3>@ViewBag.Title</h3>
+
+<span>Instructor: @ViewBag.Instructor</span><br />
+<span>Period: @ViewBag.PeriodNumber</span>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+        </tr>
+    }
+
+</table>
