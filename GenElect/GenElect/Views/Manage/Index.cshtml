@@ -12,29 +12,32 @@
     <dl class="dl-horizontal">
         @if (ViewBag.User.Elective1 == 0)
         {
-            <dd>Elective 1: Not Chosen</dd>
+            <dd><b>Elective 1:</b> Not Chosen</dd>
         }
         else
         { 
-            <dd>Elective 1: @ViewBag.e1.Name | @Html.ActionLink("Unregister","Unregister", new { electiveID = ViewBag.User.Elective1, period = 1 })</dd>
+            <dd><b>Elective 1:</b> @ViewBag.e1.Name | @Html.ActionLink("Unregister","Unregister", new { electiveID = ViewBag.User.Elective1, period = 1 })</dd>
+            <dd>Details and location: @ViewBag.e1.Description</dd>
         }
         
         @if (ViewBag.User.Elective2 == 0)
         {
-            <dd>Elective 2: Not Chosen</dd>
+            <dd><b>Elective 2:</b> Not Chosen</dd>
         }
         else
         {
-            <dd>Elective 2: @ViewBag.e2.Name | @Html.ActionLink("Unregister", "Unregister", new { electiveID = ViewBag.User.Elective2, period = 2 })</dd>
+            <dd><b>Elective 2:</b> @ViewBag.e2.Name | @Html.ActionLink("Unregister", "Unregister", new { electiveID = ViewBag.User.Elective2, period = 2 })</dd>
+            <dd>Details and location: @ViewBag.e2.Description<br /></dd>
         }
 
         @if (ViewBag.User.Elective3 == 0)
         {
-            <dd>Elective 3: Not Chosen</dd>
+            <dd><b>Elective 3:</b> Not Chosen</dd>
         }
         else
         {
-            <dd>Elective 3: @ViewBag.e3.Name | @Html.ActionLink("Unregister", "Unregister", new { electiveID = ViewBag.User.Elective3, period = 3 })</dd>
+            <dd><b>Elective 3:</b> @ViewBag.e3.Name | @Html.ActionLink("Unregister", "Unregister", new { electiveID = ViewBag.User.Elective3, period = 3 })</dd>
+            <dd>Details and location: @ViewBag.e3.Description</dd>
         }
     </dl>
 </div>

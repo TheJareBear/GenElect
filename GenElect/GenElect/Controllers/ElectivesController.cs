@@ -48,7 +48,7 @@ namespace GenElect.Controllers
         public ActionResult Roster(int? id, int? period)
         {
             ApplicationDbContext appDb = new ApplicationDbContext();
-            var students = appDb.Users.Where(s => s.Elective1 == -99);
+            var students = appDb.Users.Where(s => s.Elective1 == -99); //find no students (for data type purposes)
             if (period == 1)
             {
                 students = appDb.Users.Where(s => s.Elective1 == id);
