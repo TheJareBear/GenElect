@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GenElect.Models;
+using GenElect.DAL;
 
 namespace GenElect.Controllers
 {
@@ -14,5 +16,6 @@ namespace GenElect.Controllers
         {
             return View();
         }
+
     }
 }
