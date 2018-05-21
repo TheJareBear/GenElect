@@ -45,6 +45,6 @@ Periods shouldn't require much management either, but I included it just in case
 
 # Final notes:
 1. There is no way to change current password of a user or the admin (which is currently admin@genelect.com:Password1!) but a solution would be to hash the password yourself and change the database entry or creating a new admin user and then deleting the current admin from the database.
-2. The users selected electives need to be reset after each day when electives are deleted. I hope to update so the admin only has to press one button to reset all current registrations. Otherwise when electives are removed, the schedule portion of the application will try to grab info about an elective that has been removed.
+2. The users selected electives need to be reset after each day when electives are deleted. I added the link to reset registrations at the bottom of the Admin control panel. This link should be clicked at the end of each day to reset the student count of each elective and the registrations of each student.
 3. Users need to be entered manually through the create user functionallity in the site or through the database AspNetUsers table itself. I also want to update this so that users can be added by uploading an excel or text document that has the required info (future todo)
 4. Enjoy the camp! Hope this can help a little this year and as I get some feedback I will be sure to fine tune it for the years to come.
